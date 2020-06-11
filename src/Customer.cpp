@@ -16,10 +16,8 @@ string Customer::statement()
     ostringstream result;
     result << "Rental Record for " << getName() << "\n";
 
-    for ( auto iter = _rentals.begin(); iter != _rentals.end(); ++iter ) {
+    for (auto each : _rentals) {
         double thisAmount = 0;
-        Rental each = *iter;
-
         // determine amounts for each line
         switch ( each.getMovie().getPriceCode() ) {
             case Movie::REGULAR:
