@@ -1,10 +1,9 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 2.8.2)
+
 project(GEN_Refactor2)
 
-set(CMAKE_CXX_STANDARD 14)
-
 include(CTest)
-include_directories(src)
+set(CMAKE_CXX_FLAGS "-Wno-deprecated-declarations")
 
 if (CMAKE_VERSION VERSION_LESS 3.2)
     set(UPDATE_DISCONNECTED_IF_AVAILABLE "")
@@ -14,10 +13,10 @@ endif()
 
 include(DownloadProject.cmake)
 download_project(PROJ                googletest
-                 GIT_REPOSITORY      https://github.com/google/googletest.git
-                 GIT_TAG             master
-                 ${UPDATE_DISCONNECTED_IF_AVAILABLE}
-)
+        GIT_REPOSITORY      https://github.com/google/googletest.git
+        GIT_TAG             master
+        ${UPDATE_DISCONNECTED_IF_AVAILABLE}
+        )
 
 # Prevent GoogleTest from overriding our compiler/linker options
 # when building with Visual Studio
@@ -31,9 +30,10 @@ add_subdirectory(${googletest_SOURCE_DIR} ${googletest_BINARY_DIR})
 # required directories to the header search path ourselves.
 if (CMAKE_VERSION VERSION_LESS 2.8.11)
     include_directories("${gtest_SOURCE_DIR}/include"
-                        "${gmock_SOURCE_DIR}/include")
+            "${gmock_SOURCE_DIR}/include")
 endif()
 
+# Trivial example using gtest and gmock
 
 add_executable(GEN_Refactor2
         src/Customer.cpp
@@ -42,8 +42,9 @@ add_executable(GEN_Refactor2
         src/Movie.cpp
         src/Movie.h
         src/Rental.h
-        src/tests.cpp)
+        src/tests.cpp src/RegularMovie.cpp src/RegularMovie.h src/ChildrensMovie.cpp src/ChildrensMovie.h src/NewReleaseMovie.cpp src/NewReleaseMovie.h)
 target_link_libraries(GEN_Refactor2 gtest_main gmock_main)
+
 add_test(NAME test COMMAND GEN_Refactor2)
 
 
