@@ -34,16 +34,16 @@ if (CMAKE_VERSION VERSION_LESS 2.8.11)
                         "${gmock_SOURCE_DIR}/include")
 endif()
 
-# Trivial example using gtest and gmock
+
 add_executable(GEN_Refactor2
         src/Customer.cpp
         src/Customer.h
-        src/main.cpp
+        #src/main.cpp
         src/Movie.cpp
         src/Movie.h
         src/Rental.h
         src/tests.cpp)
-target_link_libraries(GEN_Refactor2 gtest gmock_main)
+target_link_libraries(GEN_Refactor2 gtest_main gmock_main)
 add_test(NAME test COMMAND GEN_Refactor2)
 
 
