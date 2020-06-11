@@ -14,6 +14,7 @@ public:
     int getPriceCode() const;
     void setPriceCode( int arg );
     std::string getTitle() const;
+    virtual inline double getAmount(int nbRentedDays) const = 0;
 
 private:
     std::string _title;
@@ -34,5 +35,7 @@ setPriceCode( int arg ) { _priceCode = arg; }
 
 inline std::string Movie::
 getTitle() const { return _title; }
+
+
 
 #endif // MOVIE_H
