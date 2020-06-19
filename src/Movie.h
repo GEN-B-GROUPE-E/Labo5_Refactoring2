@@ -2,36 +2,38 @@
 #ifndef MOVIE_H
 #define MOVIE_H
 #include <string>
+#include "MovieState.h"
+#include "RegularMovieState.h"
 
 class Movie {
 public:
-    static const int CHILDRENS   = 2;
-    static const int REGULAR     = 0;
-    static const int NEW_RELEASE = 1;
 
-    Movie( const std::string& title, int priceCode = REGULAR );
+    Movie( const std::string& title, const MovieState* priceCode = RegularMovieState::getInstance() );
 
-    int getPriceCode() const;
-    void setPriceCode( int arg );
+    const MovieState* getPriceCode() const;
+    void setState(MovieState*);
     std::string getTitle() const;
-    virtual inline double getAmount(int nbRentedDays) const = 0;
+    inline double getAmount(int nbRentedDays) const
+    {
+        return _priceCode->getAmount(nbRentedDays);
+    }
 
 private:
     std::string _title;
-    int _priceCode;
+    const MovieState* _priceCode;
 };
 
 inline Movie::
-Movie( const std::string& title, int priceCode )
+Movie( const std::string& title, const MovieState* priceCode )
         : _title( title )
         , _priceCode( priceCode )
 {}
 
-inline int Movie::
+inline const MovieState* Movie::
 getPriceCode() const { return _priceCode; }
 
 inline void Movie::
-setPriceCode( int arg ) { _priceCode = arg; }
+setState(MovieState* movieState) { _priceCode =  movieState;}
 
 inline std::string Movie::
 getTitle() const { return _title; }

@@ -48,12 +48,13 @@ add_executable(GEN_Refactor2
         src/Rental.cpp
         src/Rental.h
         src/tests.cpp
-        src/RegularMovie.cpp
-        src/RegularMovie.h
-        src/ChildrensMovie.cpp
-        src/ChildrensMovie.h
-        src/NewReleaseMovie.cpp
-        src/NewReleaseMovie.h)
+        src/RegularMovieState.cpp
+        src/RegularMovieState.h
+        src/ChildrensMovieState.cpp
+        src/ChildrensMovieState.h
+        src/NewReleaseMovieState.cpp
+        src/NewReleaseMovieState.h
+        src/MovieState.h)
 target_link_libraries(GEN_Refactor2 gtest_main gmock_main)
 
 add_test(NAME test COMMAND GEN_Refactor2)

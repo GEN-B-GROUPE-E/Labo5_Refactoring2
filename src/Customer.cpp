@@ -2,6 +2,7 @@
 #include <sstream>
 #include <vector>
 #include "Customer.h"
+#include "NewReleaseMovieState.h"
 
 using std::ostringstream;
 using std::vector;
@@ -22,7 +23,7 @@ string Customer::statement()
         // add frequent renter points
         frequentRenterPoints++;
         // add bonus for a two day new release rental
-        if ( (( each.getMovie())->getPriceCode() == Movie::NEW_RELEASE )
+        if ( (( each.getMovie())->getPriceCode() == NewReleaseMovieState::getInstance() )
              && each.getDaysRented() > 1 ) frequentRenterPoints++;
 
         // show figures for this rental

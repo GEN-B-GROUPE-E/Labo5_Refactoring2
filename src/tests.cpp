@@ -3,18 +3,18 @@
 #include "gmock/gmock.h"
 
 #include "Customer.h"
-#include "RegularMovie.h"
-#include "NewReleaseMovie.h"
-#include "ChildrensMovie.h"
+#include "RegularMovieState.h"
+#include "NewReleaseMovieState.h"
+#include "ChildrensMovieState.h"
 
 
 TEST(customer, statement)
 {
     Customer customer("Olivier");
 
-    RegularMovie movie1 =  RegularMovie("Karate Kid", Movie::REGULAR);
-    NewReleaseMovie movie2 =  NewReleaseMovie("Avengers: Endgame", Movie::NEW_RELEASE);
-    ChildrensMovie movie3 =  ChildrensMovie("Snow White", Movie::CHILDRENS);
+    Movie movie1 =  Movie("Karate Kid", RegularMovieState::getInstance());
+    Movie movie2 =  Movie("Avengers: Endgame", NewReleaseMovieState::getInstance());
+    Movie movie3 =  Movie("Snow White", ChildrensMovieState::getInstance());
 
     customer.addRental( Rental(  &movie1, 7));
     customer.addRental( Rental( &movie2, 5));
