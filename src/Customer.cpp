@@ -17,7 +17,7 @@ string Customer::statement()
     result << "Rental Record for " << getName() << "\n";
 
     for (auto each : _rentals) {
-        double thisAmount = each.getMovie()->getAmount(each.getDaysRented());
+        double thisAmount = each.getAmount();
 
         // add frequent renter points
         frequentRenterPoints++;
