@@ -1,6 +1,7 @@
 // Customer.cpp
 #include <sstream>
 #include <vector>
+#include <iostream>
 #include "Customer.h"
 #include "NewReleaseMovieState.h"
 
@@ -11,6 +12,7 @@ using namespace std;
 
 string Customer::statement()
 {
+    //TODO : Faudrait-il tranformer totalAmount et frequentRenterPoints en attributs ?
     double totalAmount = 0;
     int frequentRenterPoints = 0;
 
@@ -20,14 +22,10 @@ string Customer::statement()
     for (auto each : _rentals) {
         double thisAmount = each.getAmount();
 
-        // add frequent renter points
-        frequentRenterPoints++;
-        // add bonus for a two day new release rental
-        if ( (( each.getMovie())->getPriceCode() == NewReleaseMovieState::getInstance() )
-             && each.getDaysRented() > 1 ) frequentRenterPoints++;
+        frequentRenterPoints += each.getPoints();
 
         // show figures for this rental
-        result << "\t" << each.getMovie()->getTitle() << "\t"
+        result << "\t" << each.getMovieTitle() << "\t"
                << thisAmount << "\n";
         totalAmount += thisAmount; // TODO va proablement disparaitre
     }

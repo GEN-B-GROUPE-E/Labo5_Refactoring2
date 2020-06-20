@@ -14,3 +14,7 @@ int Rental::getDaysRented() const { return _daysRented; }
 const Movie* Rental::getMovie() const { return _movie; }
 
 double Rental::getAmount() const {return _movie->getAmount(_daysRented);}
+
+int Rental::getPoints() const {return _movie->getPoints(_daysRented);}
+
+std::string Rental::getMovieTitle() const {return _movie->getTitle();}

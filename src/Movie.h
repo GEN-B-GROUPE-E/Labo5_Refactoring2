@@ -13,9 +13,14 @@ public:
     const MovieState* getPriceCode() const;
     void setState(MovieState*);
     std::string getTitle() const;
-    inline double getAmount(int nbRentedDays) const
+    double getAmount(int nbRentedDays) const
     {
         return _priceCode->getAmount(nbRentedDays);
+    }
+
+    int getPoints(int nbRentedDays) const
+    {
+        return _priceCode->getPoints(nbRentedDays);
     }
 
 private:

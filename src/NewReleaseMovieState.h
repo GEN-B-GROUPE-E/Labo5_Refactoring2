@@ -14,6 +14,8 @@ private:
 public:
     double getAmount(int nbRentedDays) const override;
     const static MovieState* getInstance();
+
+    int getPoints(int nbRentedDays) const override;
 };
 
 

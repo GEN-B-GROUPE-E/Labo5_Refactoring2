@@ -10,6 +10,8 @@ public:
     int getDaysRented() const;
     const Movie* getMovie() const;
     double getAmount() const;
+    int getPoints() const;
+    std::string getMovieTitle() const;
 
 private:
     Movie* _movie;

@@ -10,6 +10,10 @@ class MovieState {
 
 public:
     virtual double getAmount(int nbRentedDays) const = 0;
+    virtual int getPoints(int nbRentedDays) const
+    {
+        return 1;
+    }
 };
 
 
