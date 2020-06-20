@@ -1,6 +1,10 @@
-cmake_minimum_required(VERSION 2.8.2)
+cmake_minimum_required(VERSION 3.12)
+
+set(CMAKE_CXX_STANDARD 14)
 
 project(GEN_Refactor2)
+
+include_directories(src)
 
 include(CTest)
 set(CMAKE_CXX_FLAGS "-Wno-deprecated-declarations")
@@ -41,8 +45,16 @@ add_executable(GEN_Refactor2
         #src/main.cpp
         src/Movie.cpp
         src/Movie.h
+        src/Rental.cpp
         src/Rental.h
-        src/tests.cpp src/RegularMovie.cpp src/RegularMovie.h src/ChildrensMovie.cpp src/ChildrensMovie.h src/NewReleaseMovie.cpp src/NewReleaseMovie.h)
+        src/tests.cpp
+        src/RegularMovieState.cpp
+        src/RegularMovieState.h
+        src/ChildrensMovieState.cpp
+        src/ChildrensMovieState.h
+        src/NewReleaseMovieState.cpp
+        src/NewReleaseMovieState.h
+        src/MovieState.h)
 target_link_libraries(GEN_Refactor2 gtest_main gmock_main)
 
 add_test(NAME test COMMAND GEN_Refactor2)
