@@ -3,11 +3,50 @@
 #include "gmock/gmock.h"
 
 #include "Customer.h"
-#include "RegularMovieState.h"
 #include "NewReleaseMovieState.h"
 #include "ChildrensMovieState.h"
-#include "MovieState.h"
+#include "RentalMock.h"
 
+using ::testing::Return;
+
+TEST(customer, getTotalAmount){
+
+    MovieMock movie("OSS 117");
+
+    RentalMock rent1(&movie, 1);
+    RentalMock rent2(&movie, 2);
+    RentalMock rent3(&movie, 3);
+
+    EXPECT_CALL(rent1, getAmount()).WillRepeatedly(Return(42));
+    EXPECT_CALL(rent2, getAmount()).WillRepeatedly(Return(11));
+    EXPECT_CALL(rent3, getAmount()).WillRepeatedly(Return(12));
+
+    Customer customer("Hubert");
+
+    customer.addRental(&rent1);
+    customer.addRental(&rent2);
+    customer.addRental(&rent3);
+
+    ASSERT_EQ(customer.getTotalAmount(), 55);
+}
+TEST(customer, getTotalPoints){
+    MovieMock movie("OSS 117");
+
+    RentalMock rent1(&movie, 1);
+    RentalMock rent2(&movie, 2);
+    RentalMock rent3(&movie, 3);
+
+    EXPECT_CALL(rent1, getPoints()).WillRepeatedly(Return(2));
+    EXPECT_CALL(rent2, getPoints()).WillRepeatedly(Return(5));
+    EXPECT_CALL(rent3, getPoints()).WillRepeatedly(Return(1));
+
+    Customer customer("Hubert");
+    customer.addRental(&rent1);
+    customer.addRental(&rent2);
+    customer.addRental(&rent3);
+
+    ASSERT_EQ(customer.getTotalPoints(), 8);
+}
 TEST(movieState, getAmount)
 {
     const MovieState* state1 = RegularMovieState::getInstance();
@@ -44,10 +83,12 @@ TEST(customer, statement)
     Movie movie1 =  Movie("Karate Kid", RegularMovieState::getInstance());
     Movie movie2 =  Movie("Avengers: Endgame", NewReleaseMovieState::getInstance());
     Movie movie3 =  Movie("Snow White", ChildrensMovieState::getInstance());
-
-    customer.addRental( Rental(  &movie1, 7));
-    customer.addRental( Rental( &movie2, 5));
-    customer.addRental( Rental( &movie3, 3 ));
+    Rental rent1 = Rental(  &movie1, 7);
+    Rental rent2 = Rental( &movie2, 5);
+    Rental rent3 = Rental( &movie3, 3 );
+    customer.addRental( &rent1);
+    customer.addRental( &rent2);
+    customer.addRental( &rent3);
 
     ASSERT_EQ(customer.statement(), "Rental Record for Olivier\n"
         "\tKarate Kid\t9.5\n"
