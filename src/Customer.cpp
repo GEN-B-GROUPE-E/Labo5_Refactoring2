@@ -10,28 +10,33 @@ using std::vector;
 
 using namespace std;
 
-string Customer::statement()
-{
-    //TODO : Faudrait-il tranformer totalAmount et frequentRenterPoints en attributs ?
-    double totalAmount = 0;
-    int frequentRenterPoints = 0;
-
+string Customer::statement(){
     ostringstream result;
     result << "Rental Record for " << getName() << "\n";
-
-    for (auto each : _rentals) {
-        double thisAmount = each.getAmount();
-
-        frequentRenterPoints += each.getPoints();
-
-        // show figures for this rental
-        result << "\t" << each.getMovieTitle() << "\t"
-               << thisAmount << "\n";
-        totalAmount += thisAmount; // TODO va proablement disparaitre
+    for(auto each: _rentals){
+        result << "\t" << each->getMovieTitle() << "\t"
+               << each->getAmount() << "\n";
     }
+
     // add footer lines
-    result << "Amount owed is " << totalAmount << "\n";
-    result << "You earned " << frequentRenterPoints
+    result << "Amount owed is " << getTotalAmount() << "\n";
+    result << "You earned " << getTotalPoints()
            << " frequent renter points";
     return result.str();
+}
+
+double Customer::getTotalAmount() const {
+    double totalAmount = 0;
+    for (auto each : _rentals) {
+        totalAmount += each->getAmount();
+    }
+    return totalAmount;
+}
+
+int Customer::getTotalPoints() const {
+    int frequentRenterPoints =0;
+    for (auto each : _rentals) {
+        frequentRenterPoints += each->getPoints();
+    }
+    return frequentRenterPoints;
 }
