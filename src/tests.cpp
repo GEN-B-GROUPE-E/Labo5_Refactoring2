@@ -27,7 +27,7 @@ TEST(customer, getTotalAmount){
     customer.addRental(&rent2);
     customer.addRental(&rent3);
 
-    ASSERT_EQ(customer.getTotalAmount(), 55);
+    ASSERT_EQ(customer.getTotalAmount(), 65);
 }
 TEST(customer, getTotalPoints){
     MovieMock movie("OSS 117");
