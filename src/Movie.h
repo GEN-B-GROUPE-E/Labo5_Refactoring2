@@ -13,7 +13,7 @@ public:
     const MovieState* getPriceCode() const;
     void setState(MovieState*);
     std::string getTitle() const;
-    double getAmount(int nbRentedDays) const
+    virtual double getAmount(int nbRentedDays) const
     {
         return _priceCode->getAmount(nbRentedDays);
     }

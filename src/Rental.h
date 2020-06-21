@@ -9,8 +9,8 @@ public:
 
     int getDaysRented() const;
     const Movie* getMovie() const;
-    double getAmount() const;
-    int getPoints() const;
+    virtual double getAmount() const;
+    virtual int getPoints() const;
     std::string getMovieTitle() const;
 
 private:
